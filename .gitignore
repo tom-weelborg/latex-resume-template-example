@@ -4,4 +4,4 @@
 # LaTeX
 /auxil
 /out
-*.private.tex
+*.private*
