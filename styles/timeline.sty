@@ -1,0 +1,103 @@
+%% Further modifications copyright 2025 Tom Weelborg
+%% Some modifications copyright 2015 Clea F. Rees
+%% Code from origfile copyright 2011 Levi Wiseman
+%% source: https://tex.stackexchange.com/questions/196794/how-can-you-create-a-vertical-timeline/241849#241849
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{styles/timeline}
+
+\RequirePackage{calc}
+\RequirePackage{tikz}
+\RequirePackage{ifthen}
+\RequirePackage{xstring}
+
+\newcounter{step}
+\newcounter{stepstart}
+\newcounter{stepstop}
+
+\newcounter{yearstart}
+\newcounter{yearstop}
+\newcounter{deltayears}
+
+\newlength{\ystart}
+\newlength{\ystop}
+\newlength{\unit}
+\newlength{\timelineheight}
+
+\makeatletter
+    \newif\ifchronology@star
+
+    \newenvironment{chronology}{%
+        \@ifstar{\chronology@startrue\chronology@i*}{\chronology@starfalse\chronology@i*}%
+    }{%
+        \end{tikzpicture}%
+    }%
+
+    \def\chronology@i*{%
+        \@ifnextchar[{\chronology@ii*}{\chronology@ii*[{5}]}%
+    }%
+
+    \def\chronology@ii*[#1]#2#3#4{%
+        \@ifnextchar[{\chronology@iii*[{#1}]{#2}{#3}{#4}}{\chronology@iii*[{#1}]{#2}{#3}{#4}[{#4}]}%
+    }%
+
+    \def\chronology@iii*[#1]#2#3#4[#5]{%
+        \newif\ifflipped%
+        \ifchronology@star%
+            \flippedtrue%
+        \else%
+            \flippedfalse%
+        \fi%
+        \setcounter{step}{#1}%
+        \setcounter{yearstart}{#2}\setcounter{yearstop}{#3}%
+        \setcounter{deltayears}{\theyearstop-\theyearstart}%
+        \setlength{\unit}{#5/\thedeltayears}%
+        \setlength{\timelineheight}{#4}%
+        \pgfmathsetcounter{stepstart}{\theyearstart+\thestep-mod(\theyearstart,\thestep)}%
+        \pgfmathsetcounter{stepstop}{\theyearstop-mod(\theyearstop,\thestep)}%
+        \addtocounter{step}{\thestepstart}%
+        \begin{tikzpicture}[baseline={(current bounding box.north)}]%
+            \draw [|->] (0,0) -- (0,-\thedeltayears*\unit-\unit);%
+            \foreach \y in {1,...,\thedeltayears}%
+            \draw[yshift=-\y*\unit] (-.1\unit,0) -- (.1\unit,0);%
+            \addtocounter{deltayears}{1}%
+            \foreach \y in {\thestepstart,\thestep,...,\thestepstop}{%
+                \pgfmathsetlength\ystop{(-\y+\theyearstart)*\unit}%
+                \draw[yshift=\ystop] (-.3\unit,0) -- (.3\unit,0);%
+                \ifflipped%
+                    \node at (0,\ystop) [left=.2\unit] {\y};%
+                \else%
+                    \node at (0,\ystop) [right=.2\unit] {\y};%
+                \fi%
+            }%
+    }%
+\makeatother
+
+\NewDocumentCommand{\event}{ O{e} O{black} m m }{%
+    \pgfmathsetlength\ystop{(#3-\theyearstart)*\unit}%
+    \IfStrEq{#1}{e}{%
+        \ifflipped%
+            \draw[fill=#2,draw=none,opacity=0.5]%
+                (0,-\ystop) circle (.2\unit)%
+                node[opacity=1,right=.5\unit,align=left] {#4};%
+        \else%
+            \draw[fill=#2,draw=none,opacity=0.5]%
+                (0,-\ystop) circle (.2\unit)%
+                node[opacity=1,left=.5\unit,align=left] {#4};%
+        \fi%
+    }{%
+        \pgfmathsetlength\ystart{(#1-\theyearstart)*\unit}%
+        \ifflipped%
+            \draw[fill=#2,draw=none,opacity=0.5,rounded corners=.2\unit]%
+                (-.2\unit,-\ystart) rectangle%
+                node[opacity=1,right=.5\unit,align=left] {#4} (.2\unit,-\ystop);%
+        \else%
+            \draw[fill=#2,draw=none,opacity=0.5,rounded corners=.2\unit]%
+                (-.2\unit,-\ystart) rectangle%
+                node[opacity=1,left=.5\unit,align=left] {#4} (.2\unit,-\ystop);%
+        \fi%
+    }%
+}
+
+\newcommand{\decimaldate}[3]{(#1-1)/31/12+(#2-1)/12+#3}
+
+\endinput
