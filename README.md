@@ -23,6 +23,7 @@ There are some files that you need to create to use this template:
   - List your interests [here](./contents/left_column/interests.private.tex).
     Example: `\item Programming`
 - You also need to add some files to fill in information about yourself for the right column:
+  - Tell them something about yourself [here](./contents/right_column/about_me.private.tex).
   - Create the timeline of your life [here](./contents/right_column/timeline_elements.private.tex).
     Example: `\event[2020][blue]{2025}{\textbf{Senior Software Engineer} at \textbf{GitHub}}`
 
