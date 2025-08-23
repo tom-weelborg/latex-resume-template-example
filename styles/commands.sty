@@ -14,8 +14,12 @@
     \end{picture}%
 }
 
-\newcommand{\ProgrammingLanguage}[3]{%
+\newcommand{\Language}[2]{%
     \item #1 \hfill \skill[#2]%
+}
+
+\newcommand{\ProgrammingLanguage}[3]{%
+    \Language{#1}{#2}%
     \ifthenelse{\equal{#3}{}}{%
     }{%
         \\ {\footnotesize #3}%
