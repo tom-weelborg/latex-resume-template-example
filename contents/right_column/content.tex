@@ -11,7 +11,15 @@
 \\
 \PersonEmail
 \\
-\PersonStreet{} \PersonHouseNumber{}, \PersonPostalCode{} \PersonCity{}\ifthenelse{\equal{\PersonCountry}{}}{}{, \PersonCountry}
+\PersonStreet%
+\ifthenelse{\equal{\PersonStreet}{}}{}{\ifthenelse{\equal{\PersonHouseNumber}{}}{}{ }}%
+\PersonHouseNumber%
+\ifthenelse{\equal{\PersonStreet\PersonHouseNumber}{}}{}{\ifthenelse{\equal{\PersonPostalCode\PersonCity}{}}{}{, }}%
+\PersonPostalCode%
+\ifthenelse{\equal{\PersonPostalCode}{}}{}{\ifthenelse{\equal{\PersonCity}{}}{}{ }}%
+\PersonCity%
+\ifthenelse{\equal{\PersonStreet\PersonHouseNumber\PersonPostalCode\PersonCity}{}}{}{\ifthenelse{\equal{\PersonCountry}{}}{}{, }}%
+\PersonCountry%
 
 \vspace{0.5cm}
 
