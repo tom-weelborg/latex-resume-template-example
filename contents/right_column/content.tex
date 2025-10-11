@@ -50,3 +50,16 @@
 \begin{tabular}{ r | l }
     \optionalinput{contents/right_column/degrees.private}
 \end{tabular}
+
+\ifthenelse{\boolean{UseSignature}}{
+    \vspace*{0.5cm}
+
+    \SignaturePlace%
+    \ifthenelse{\equal{\SignaturePlace}{}}{}{, }%
+    \today
+
+    \vspace*{0.5cm}
+
+    \hspace*{5.5cm}\hrulefill\\
+    \hspace*{6.5cm}\hfill \PersonFirstName{} \PersonLastName{}\hfill\mbox{}
+}{}
