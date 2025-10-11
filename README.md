@@ -30,6 +30,9 @@ There are some files that you need to create to use this template:
   - Show what you learned [here](./contents/right_column/degrees.private.tex).
     Example: `2020 & Computer Science (Master of Science)`
 
+Additionally, available document languages can be customized [here](./styles/language.sty).
+They can be selected in the [private constants file](./shared/constants.private.tex) using for example `\selectlanguage{ngerman}`.
+
 ## Inspirations
 
 This template was inspired by many different works of other people.
