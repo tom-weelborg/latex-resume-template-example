@@ -52,8 +52,8 @@
         \setcounter{deltayears}{\theyearstop-\theyearstart}%
         \setlength{\unit}{#5/\thedeltayears}%
         \setlength{\timelineheight}{#4}%
-        \pgfmathsetcounter{stepstart}{\theyearstart+\thestep-mod(\theyearstart,\thestep)}%
-        \pgfmathsetcounter{stepstop}{\theyearstop-mod(\theyearstop,\thestep)}%
+        \pgfmathsetcounter{stepstart}{ceil(\theyearstart / \thestep) * \thestep}%
+        \pgfmathsetcounter{stepstop}{floor(\theyearstop / \thestep) * \thestep}%
         \addtocounter{step}{\thestepstart}%
         \begin{tikzpicture}[baseline={(current bounding box.north)}]%
             \draw [|->] (0,0) -- (0,-\thedeltayears*\unit-\unit);%
