@@ -3,6 +3,9 @@
 This is a template for a LaTeX résumé.
 The original template can be found [here](https://github.com/tom-weelborg/latex-resume-template).
 
+> [!IMPORTANT]
+> All image credits go to Disney. The images are used only for demonstration purposes.
+
 ## Requirements
 
 You need a [LaTeX](https://www.latex-project.org/) distribution.
@@ -37,6 +40,8 @@ They can be selected in the [private constants file](./shared/constants.private.
 
 This template was inspired by many different works of other people.
 These works are listed below, divided into content and structural inspirations for the résumé itself and technical inspirations for LaTeX.
+
+The character and the images of it are property of Disney.
 
 ### Résumé
 
