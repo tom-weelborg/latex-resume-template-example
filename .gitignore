@@ -3,4 +3,5 @@
 
 # LaTeX
 /auxil
-/out
+/out/**
+!/out/main.pdf
