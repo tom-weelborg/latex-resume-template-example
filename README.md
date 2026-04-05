@@ -1,7 +1,7 @@
 # latex-resume
 
 This is a template for a LaTeX résumé.
-A full example can be found [here](https://github.com/tom-weelborg/latex-resume-template-example).
+The original template can be found [here](https://github.com/tom-weelborg/latex-resume-template).
 
 ## Requirements
 
