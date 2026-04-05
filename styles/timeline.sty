@@ -64,9 +64,9 @@
                 \pgfmathsetlength\ystop{(-\y+\theyearstart)*\unit}%
                 \draw[yshift=\ystop] (-.3\unit,0) -- (.3\unit,0);%
                 \ifflipped%
-                    \node at (0,\ystop) [left=.2\unit] {\y};%
+                    \node at (0,\ystop) [left=.2\unit] {\ifnum\y<0 \number\numexpr-\y\relax~BBY\else \y~ABY\fi};%
                 \else%
-                    \node at (0,\ystop) [right=.2\unit] {\y};%
+                    \node at (0,\ystop) [right=.2\unit] {\ifnum\y<0 \number\numexpr-\y\relax~BBY\else \y~ABY\fi};%
                 \fi%
             }%
     }%
